@@ -2,3 +2,49 @@ python3 -m venv venv
 source venv/bin/activate
 pip3 install --upgrade pip
 pip3 install fastapi[all]
+
+
+postgres setup
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql postgresql-contrib
+
+sudo -u postgres postgresql
+ALTER USER postgres PASSWORD 'root'; password is cdnsdn?
+psql -U postgres -h localhost
+\q to quit
+\d to show databases
+\du to show users and their role
+
+create a user: 
+CREATE USER chinmay WITH CREATEDB LOGIN ENCRPTED PASSWORD 'admin';
+
+Creating db with same name as user in order to store data of user and his privileges
+CREATE DATABASE chinmay;
+\du
+
+
+CREATE DATABASE codingpub
+give access of codingpub db to chinmayGRANT ALL PRIVILEGES ON DATABASE codingpub TO chinmay
+
+psql -U postgres -h localhost  #as postgres is used, this is super user
+CREATE DATABASE cb;
+DROP DATABASE cb;  # this is exec successfully
+
+# now login with user chinmay who has limited privileges
+psql -U chinmay -h localhost
+CREATE DATABASE ab;
+DROP DATABASE ab; # successful
+DROP DATABASE codingpub # ERROR
+
+install pgAdmin4
+
+sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo apt install pgadmin4
+
+open pgadmin4 from ubuntu menu
+https://www.youtube.com/watch?v=lX9uMCSqqko
+username: postgres
+password: cdnsdn
