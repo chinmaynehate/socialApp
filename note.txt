@@ -48,3 +48,11 @@ open pgadmin4 from ubuntu menu
 https://www.youtube.com/watch?v=lX9uMCSqqko
 username: postgres
 password: cdnsdn
+
+
+
+pip3 install passlib[bcrypt]
+pip3 install sqlalchemy
+pip3 install pscopg2
+pip3 install fastapi[all]
+pip3 install --upgrade pip
