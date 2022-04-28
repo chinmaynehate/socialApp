@@ -5,7 +5,7 @@ from ..database import get_db
 from typing import List
 
 
-router = APIRouter(prefix = "/posts")
+router = APIRouter(prefix = "/posts",tags=['Posts'])
 
 
 # create one post

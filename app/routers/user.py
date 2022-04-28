@@ -8,7 +8,7 @@ from typing import List
 
 
 
-router = APIRouter(prefix = "/users")
+router = APIRouter(prefix = "/users",tags=['Users'])
 
 # create user
 @router.post("/", status_code=status.HTTP_201_CREATED,response_model=schemas.UserOut)
@@ -35,3 +35,12 @@ def get_user(id: int,db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"User with id: {id} not found")
     return user
     
+# delete all users
+@router.delete("/",status_code=status.HTTP_302_FOUND)
+def get_user(db: Session = Depends(get_db)):
+    user = db.query(models.User)
+    user.delete()
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+        

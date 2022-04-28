@@ -5,8 +5,11 @@ from pydantic import BaseModel, EmailStr
 
 
 # Pydantic model of the post
-# they define the structure of request and response
+# Defines the structure of the REQUEST that is sent by the client to API
+# Defines the structure of the RESPONSE that is sent by the API to client
 
+
+# for /posts
 
 # request pydantic model
 class PostBase(BaseModel):
@@ -18,8 +21,6 @@ class PostBase(BaseModel):
 class PostCreate(PostBase):
     pass
 
-
-
 # response pydantic model
 class Post(PostBase):
     id : int
@@ -29,12 +30,15 @@ class Post(PostBase):
         orm_mode = True
         
         
-# pdantic request model for user
+        
+# for /users
+            
+# pydantic request model for user
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
     
-# pdantic response model for user
+# pydantic response model for user
 class UserOut(BaseModel):
     id: int
     created_at: datetime
@@ -42,3 +46,12 @@ class UserOut(BaseModel):
     
     class Config:
         orm_mode=True
+        
+        
+        
+# for /login
+
+# pydantic model for sending a login request to the API
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
