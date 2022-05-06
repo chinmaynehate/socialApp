@@ -17,7 +17,7 @@ psql -U postgres -h localhost
 \d to show databases
 \du to show users and their role
 
-create a user: 
+create a user
 CREATE USER chinmay WITH CREATEDB LOGIN ENCRPTED PASSWORD 'admin';
 
 Creating db with same name as user in order to store data of user and his privileges
